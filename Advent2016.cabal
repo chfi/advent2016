@@ -13,7 +13,15 @@ build-type:          Simple
 cabal-version:       >=1.10
 extra-source-files:  README.md
 
-executable Day2
+executable day1
+  hs-source-dirs:      src
+  main-is:             Day1.hs
+  default-language:    Haskell2010
+  build-depends:       base >= 4.7 && < 5
+                     , text
+                     , containers
+
+executable day2
   hs-source-dirs:      src
   main-is:             Day2.hs
   default-language:    Haskell2010
@@ -21,7 +29,7 @@ executable Day2
                      , text
 
 
-executable Day3
+executable day3
   hs-source-dirs:      src
   main-is:             Day3.hs
   default-language:    Haskell2010
@@ -30,7 +38,7 @@ executable Day3
                      , attoparsec
 
 
-executable Day4
+executable day4
   hs-source-dirs:      src
   main-is:             Day4.hs
   default-language:    Haskell2010
@@ -38,3 +46,17 @@ executable Day4
                      , text
                      , attoparsec
                      , containers
+
+
+executable day5
+  hs-source-dirs:      src
+  main-is:             Day5.hs
+  default-language:    Haskell2010
+  build-depends:       base >= 4.7 && < 5
+                     , bytestring
+                     , containers
+                     , pureMD5
+                     , attoparsec
+                     , ansi-terminal
+                     , random
+                     , text
