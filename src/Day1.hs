@@ -2,6 +2,7 @@
 
 module Main where
 
+import Control.Applicative
 import Control.Monad
 
 import Data.Maybe (mapMaybe)
@@ -13,6 +14,8 @@ import qualified Data.Text.IO as TIO
 
 import Data.Set (Set)
 import qualified Data.Set as Set
+
+import Data.Attoparsec.Text
 
 data Dir = N | E | S | W deriving (Eq, Ord, Show)
 
@@ -56,6 +59,18 @@ interpretInsts is = reverse $ fst $
            let dir' = turn dir inst in
                (go steps dir' (instLen inst), dir')
         ) ([(0,0)], N) is
+
+
+instParser :: Parser Inst
+instParser = do
+  t <- (char 'L' >> return L) <|> (char 'R' >> return R)
+  skipSpace
+  i <- decimal
+  return $ t i
+
+-- instsParser :: Parser [Inst]
+-- instsParser = many' $ instParser <* char ',' <* skipSpace
+-- instsParser = many' $ instParser
 
 parseInst :: Text -> Maybe Inst
 parseInst t = do

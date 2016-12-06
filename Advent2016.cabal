@@ -20,6 +20,7 @@ executable day1
   build-depends:       base >= 4.7 && < 5
                      , text
                      , containers
+                     , attoparsec
 
 executable day2
   hs-source-dirs:      src
@@ -59,6 +60,7 @@ executable day5
                      , attoparsec
                      , ansi-terminal
                      , random
+                     , text
 
 
 executable day6
