@@ -15,6 +15,8 @@ import Data.Text (Text)
 import qualified Data.Text as T
 import qualified Data.Text.IO as T.IO
 
+import System.Environment (getArgs)
+
 newtype Tri = Tri (Int, Int, Int) deriving (Eq, Show)
 
 newTri :: [Int] -> Maybe Tri
@@ -42,10 +44,6 @@ transposeInput t = T.unlines $ fmap T.unwords $ transpose $ fmap T.words $ T.lin
 parseInput :: Text -> [Tri]
 parseInput t = mapMaybe parseTri $ T.lines t
 
-
--- parseInput' :: Text -> [Tri]
--- parseInput
-
 parseInput' :: Parser [Tri]
 parseInput' = many' (parseTri' <* endOfLine) <* endOfInput
 
@@ -65,7 +63,7 @@ parseTri' = do
 
 main :: IO ()
 main = do
-  contents <- T.IO.readFile "day3input.txt"
+  contents <- T.IO.readFile =<< head <$> getArgs
 
   case parseOnly parseInput' contents of
     Left e -> print e

@@ -14,6 +14,8 @@ import qualified Data.Text.IO         as T.IO
 
 import           Data.Attoparsec.Text hiding (take)
 
+import System.Environment (getArgs)
+
 data IPv7 = IPv7 [Text] [Text] deriving (Eq, Show)
 
 ipv7Parser :: Parser IPv7
@@ -68,7 +70,7 @@ sslEnabled (IPv7 s h) = any (\t -> hasBABs t babs) h
 
 main :: IO ()
 main = do
-  contents <- T.IO.readFile "day7input.txt"
+  contents <- T.IO.readFile =<< head <$> getArgs
   let ips = parseInput contents
       tls = filter (== True) $ fmap tlsEnabled ips
       ssl = filter (== True) $ fmap sslEnabled ips

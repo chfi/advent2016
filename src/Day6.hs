@@ -11,6 +11,8 @@ import Data.Text (Text)
 import qualified Data.Text as T
 import qualified Data.Text.IO as T.IO
 
+import System.Environment (getArgs)
+
 parseInput :: Text -> [Text]
 parseInput = T.transpose . T.lines
 
@@ -21,6 +23,6 @@ decodeLine :: (Int -> Int -> Ordering) -> Text -> Char
 decodeLine f = fst . maximumBy (\(_,i) (_,j) -> f i j) . Map.toList . occurrences . T.unpack
 
 main = do
-  contents <- T.IO.readFile "day6input.txt"
+  contents <- T.IO.readFile =<< head <$> getArgs
   print $ fmap (decodeLine (flip compare)) $ parseInput contents
   print $ fmap (decodeLine compare) $ parseInput contents

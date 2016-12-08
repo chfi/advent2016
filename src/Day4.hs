@@ -14,6 +14,8 @@ import           Data.Text            (Text)
 import qualified Data.Text            as T
 import qualified Data.Text.IO         as T.IO
 
+import System.Environment (getArgs)
+
 data Room = Room Text Int Text deriving (Eq, Show)
 
 roomParser :: Parser Room
@@ -52,7 +54,7 @@ decryptRoom (Room n s _) = (decrypt s n, s)
 
 main :: IO ()
 main = do
-  contents <- T.IO.readFile "day4input.txt"
+  contents <- T.IO.readFile =<< head <$> getArgs
 
   let rooms = parseInput contents
       real = filter isRealRoom rooms

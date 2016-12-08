@@ -10,12 +10,14 @@ import Data.List
 
 import Data.Text (Text)
 import qualified Data.Text as T
-import qualified Data.Text.IO as TIO
+import qualified Data.Text.IO as T.IO
 
 import Data.Set (Set)
 import qualified Data.Set as Set
 
 import Data.Attoparsec.Text
+
+import System.Environment (getArgs)
 
 data Dir = N | E | S | W deriving (Eq, Ord, Show)
 
@@ -95,7 +97,7 @@ dist (x1,y1) (x2,y2) = abs (x2 - x1) + abs (y2 - y1)
 
 main :: IO ()
 main = do
-  contents <- TIO.readFile "day1input.txt"
+  contents <- T.IO.readFile =<< head <$> getArgs
   print $ length $ T.splitOn ", " contents
   print $ length $ parseInsts contents
   let insts = parseInsts contents

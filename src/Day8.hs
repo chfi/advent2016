@@ -13,6 +13,8 @@ import qualified Data.Text.IO         as T.IO
 
 import           Data.Attoparsec.Text hiding (take)
 
+import System.Environment (getArgs)
+
 screenWidth, screenHeight :: Int
 screenWidth = 50
 screenHeight = 6
@@ -79,7 +81,7 @@ showScreen s = unlines $ (fmap . fmap) (\c -> if c then '#' else '.') s
 
 main :: IO ()
 main = do
-  contents <- T.IO.readFile "day8input.txt"
+  contents <- T.IO.readFile =<< head <$> getArgs
   let insts = parseInput contents
       result = go (blankScreen 6 50) insts
   putStrLn $ showScreen result

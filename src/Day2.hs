@@ -8,6 +8,8 @@ import Data.Text (Text)
 import qualified Data.Text as T
 import qualified Data.Text.IO as T.IO
 
+import System.Environment (getArgs)
+
 data Dir = U | R | D | L deriving (Eq, Show)
 
 parseDir :: Char -> Maybe Dir
@@ -66,7 +68,7 @@ runMany k p rows = tail $ reverse $
 
 main :: IO ()
 main = do
-  contents <- T.IO.readFile "day2input.txt"
+  contents <- T.IO.readFile =<< head <$> getArgs
   print $ length $ T.lines contents
   let dirs = parseInput contents
       result = runMany keypad (1, 1) dirs
