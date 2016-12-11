@@ -3,6 +3,8 @@
 
 module Main where
 
+import Control.Applicative
+
 import Data.Maybe (mapMaybe)
 import Data.Text (Text)
 import qualified Data.Text as T
@@ -11,6 +13,7 @@ import qualified Data.Text.IO as T.IO
 import System.Environment (getArgs)
 
 data Dir = U | R | D | L deriving (Eq, Show)
+
 
 parseDir :: Char -> Maybe Dir
 parseDir c = case c of

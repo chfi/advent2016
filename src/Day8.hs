@@ -50,18 +50,18 @@ makeRect w h s = fmap (fillLine w) a ++ b
 
 parseOrientation :: Parser Orientation
 parseOrientation =
-    (string "row" >> return Row) <|> (string "column" >> return Column)
+    ("row" >> return Row) <|> ("column" >> return Column)
 
 parseInst :: Parser Inst
 parseInst = do
   let parseRect = do
-        string "rect" >> skipSpace
-        Rect <$> decimal <*> (string "x" *> decimal)
+        "rect" >> skipSpace
+        Rect <$> decimal <*> ("x" *> decimal)
       parseRotate = do
-        string "rotate" >> skipSpace
+        "rotate" >> skipSpace
         orient <- parseOrientation <* skipSpace
-        string "y=" <|> "x="
-        Rotate orient <$> decimal <*> (string " by " *> decimal)
+        "y=" <|> "x="
+        Rotate orient <$> decimal <*> (" by " *> decimal)
   parseRect <|> parseRotate
 
 parseInput :: Text -> [Inst]

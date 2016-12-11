@@ -21,7 +21,7 @@ data IPv7 = IPv7 [Text] [Text] deriving (Eq, Show)
 ipv7Parser :: Parser IPv7
 ipv7Parser = do
   ts <- takeWhile1 (\c -> c /= '[' && c /= ']')
-          `sepBy` (string "[" <|> string "]")
+          `sepBy` ("[" <|> "]")
   let (a, b) = alternate ts
   return $ IPv7 a b
 
