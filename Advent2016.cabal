@@ -109,3 +109,12 @@ executable day10
                      , attoparsec
                      , containers
                      , text
+
+executable day11
+  hs-source-dirs:      src
+  main-is:             Day11.hs
+  default-language:    Haskell2010
+  build-depends:       base >= 4.7 && < 5
+                     , attoparsec
+                     , containers
+                     , text
